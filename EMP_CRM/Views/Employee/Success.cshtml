@@ -1,163 +1,90 @@
-﻿@model EmployeeListViewModel
+﻿@model Employee
 
 @{
-    ViewData["Title"] = "Employee List";
+    ViewData["Title"] = "Success";
+    Layout = "~/Views/Shared/_AdminLteLayout.cshtml";
 }
 
-<div class="container mt-4">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="d-flex justify-content-between align-items-center mb-4 p-3 bg-light rounded shadow-sm">
-                <h2 class="mb-0 text-primary"><i class="bi bi-people-fill"></i> @ViewData["Title"]</h2>
-                <a class="btn btn-success btn-lg" asp-action="Create">
-                    <i class="bi bi-plus-circle"></i> Create New Employee
-                </a>
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            @* <div class="col-sm-6">
+                <h1>Employee Created Successfully</h1>
+            </div> *@
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                   @*  <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">Success</li> *@
+                </ol>
             </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
 
-            @if (TempData["Message"] != null)
-            {
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    @TempData["Message"]
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            }
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class="card card-success">
+                    <div class="card-header">
+                        <h3 class="card-title"><i class="fas fa-check-circle"></i> Employee Created Successfully!</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="text-center mb-4">
+                            <p class="text-muted">Welcome <strong>@Model.FullName</strong>! We are excited to have you join the <strong>@Model.Department</strong> department. Below are the details of the newly created employee:</p>
+                        </div>
 
-            <!-- Filter Section -->
-            <div class="card mb-4 shadow-sm">
-                <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
-                    <h5 class="mb-0">🔍 Filter Employees</h5>
-                    <span class="badge bg-light text-dark">Total Employees: @Model.Employees.Count() 📝</span>
-                </div>
-
-                <div class="card-body">
-                    <form method="get" asp-controller="Employee" asp-action="List" class="row g-3">
-                        <div class="col-md-3">
-                            <label asp-for="SearchTerm" class="form-label">🔍 Search by Name</label>
-                            <input asp-for="SearchTerm" class="form-control" placeholder="Type a name..." />
+                        <div class="table-responsive">
+                            <table class="table table-borderless">
+                                <tbody>
+                                    <tr>
+                                        <th class="text-muted text-start" style="width: 30%;">📧 Email:</th>
+                                        <td class="fw-bold text-dark text-start">@Model.Email</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-muted text-start">💼 Position:</th>
+                                        <td class="fw-bold text-dark text-start">@Model.Position</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-muted text-start">🏢 Department:</th>
+                                        <td class="fw-bold text-dark text-start">@Model.Department</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-muted text-start">🗓️ Hire Date:</th>
+                                        <td class="fw-bold text-dark text-start">@Model.HireDate?.ToShortDateString()</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-muted text-start">🎂 Date of Birth:</th>
+                                        <td class="fw-bold text-dark text-start">@Model.DateOfBirth?.ToShortDateString()</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-muted text-start">👔 Employee Type:</th>
+                                        <td class="fw-bold text-dark text-start">@Model.Type</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-muted text-start">⚧ Gender:</th>
+                                        <td class="fw-bold text-dark text-start">@Model.Gender</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-muted text-start">💰 Salary:</th>
+                                        <td class="fw-bold text-dark text-start">$@Model.Salary?.ToString("N2")</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
-                        <div class="col-md-3">
-                            <label asp-for="SelectedDepartment" class="form-label">🏢 Department</label>
-                            <select asp-for="SelectedDepartment" asp-items="@ViewBag.DepartmentOptions" class="form-control">
-                                <option value="">All Departments</option>
-                            </select>
-                        </div>
-                        <div class="col-md-3">
-                            <label asp-for="SelectedType" class="form-label">👔 Employee Type</label>
-                            <select asp-for="SelectedType" asp-items="@ViewBag.EmployeeTypeOptions" class="form-control">
-                                <option value="">All Employee Types</option>
-                            </select>
-                        </div>
-                        <div class="col-md-2">
-                            <label asp-for="PageSize" class="form-label">📄 Items per Page</label>
-                            <select asp-for="PageSize" asp-items="@ViewBag.PageSizeOptions" class="form-control" onchange="this.form.submit();"></select>
-                        </div>
-                        <div class="col-md-1 d-flex align-items-end">
-                            <button type="submit" class="btn btn-success w-100">Filter 🎯</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-
-            <div class="card shadow-sm">
-                <div class="card-body p-0">
-                    <table class="table table-hover table-striped mb-0">
-                        <thead class="bg-primary text-white">
-                            <tr>
-                                <th>📛 Name</th>
-                                <th>📧 Email</th>
-                                <th>💼 Position</th>
-                                <th>🏢 Department</th>
-                                <th>⚧ Gender</th>
-                                <th>👔 Employee Type</th>
-                                <th class="text-center">⚙️ Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var employee in Model.Employees)
-                            {
-                                <tr>
-                                    <td>@employee.FullName</td>
-                                    <td>@employee.Email</td>
-                                    <td>@employee.Position</td>
-                                    <td>@employee.Department</td>
-                                    <td>@employee.Gender</td>
-                                    <td>@employee.Type</td>
-                                    <td class="text-center">
-                                        <a class="btn btn-sm btn-info" asp-controller="Employee" asp-action="Details" asp-route-id="@employee.Id">
-                                            <i class="bi bi-eye"></i> Details
-                                        </a>
-                                        <a class="btn btn-sm btn-warning" asp-controller="Employee" asp-action="Update" asp-route-id="@employee.Id">
-                                            <i class="bi bi-pencil"></i> Update
-                                        </a>
-                                        <a class="btn btn-sm btn-danger" asp-controller="Employee" asp-action="Delete" asp-route-id="@employee.Id">
-                                            <i class="bi bi-trash"></i> Delete
-                                        </a>
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
+                    </div>
+                    <div class="card-footer text-center">
+                        <a class="btn btn-success btn-lg me-3" asp-controller="Employee" asp-action="Create">
+                            <i class="fas fa-user-plus"></i> Create Another Employee
+                        </a>
+                        <a class="btn btn-primary btn-lg" asp-controller="Employee" asp-action="List">
+                            <i class="fas fa-arrow-left"></i> Back to Employee List
+                        </a>
+                    </div>
                 </div>
             </div>
-
-            <!-- Pagination -->
-            <nav aria-label="Employee List Pagination" class="mt-4">
-                <ul class="pagination justify-content-center mb-0">
-                    @if (Model.PageNumber == 1)
-                    {
-                        <li class="page-item disabled">
-                            <span class="page-link">First ⏮️</span>
-                        </li>
-                        <li class="page-item disabled">
-                            <span class="page-link">Previous ⬅️</span>
-                        </li>
-                    }
-                    else
-                    {
-                        <li class="page-item">
-                            <a class="page-link" href="@Url.Action("List", "Employee", GetRouteValuesForPage(1))">First ⏮️</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="@Url.Action("List", "Employee", GetRouteValuesForPage(Model.PageNumber - 1))">Previous ⬅️</a>
-                        </li>
-                    }
-                    <li class="page-item active">
-                        <span class="page-link">@Model.PageNumber</span>
-                    </li>
-                    @if (Model.PageNumber == Model.TotalPages)
-                    {
-                        <li class="page-item disabled">
-                            <span class="page-link">Next ➡️</span>
-                        </li>
-                        <li class="page-item disabled">
-                            <span class="page-link">Last ⏭️</span>
-                        </li>
-                    }
-                    else
-                    {
-                        <li class="page-item">
-                            <a class="page-link" href="@Url.Action("List", "Employee", GetRouteValuesForPage(Model.PageNumber + 1))">Next ➡️</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="@Url.Action("List", "Employee", GetRouteValuesForPage(Model.TotalPages))">Last ⏭️</a>
-                        </li>
-                    }
-                </ul>
-            </nav>
         </div>
     </div>
-</div>
-
-@functions {
-    private object GetRouteValuesForPage(int pageNumber)
-    {
-        return new
-        {
-            SearchTerm = Model.SearchTerm,
-            SelectedDepartment = Model.SelectedDepartment,
-            SelectedType = Model.SelectedType,
-            PageSize = Model.PageSize,
-            PageNumber = pageNumber
-        };
-    }
-}
+</section>

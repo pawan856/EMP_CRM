@@ -2,162 +2,447 @@
 
 @{
     ViewData["Title"] = "Create New Employee";
-    Layout=null
+    Layout = "~/Views/Shared/_AdminLteLayout.cshtml"; 
 }
 
-<div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-lg-8 col-md-10">
-            <div class="card border-0 shadow-sm">
-                <div class="card-body p-4 border rounded">
-                    <h2 class="text-center text-primary mb-4">👤 Create New Employee</h2>
+<div class="">
+    <section class="content-header">
+        <div class="container-fluid">
 
-                    <form asp-controller="Employee" asp-action="Create" method="post">
-                        <div class="row mb-3">
-                            <label asp-for="FullName" class="col-sm-3 col-form-label text-end">Full Name:</label>
-                            <div class="col-sm-9">
-                                <input asp-for="FullName" class="form-control" placeholder="Enter full name" title="Full Name" />
-                                <span asp-validation-for="FullName" class="text-danger"></span>
-                            </div>
+        </div>
+    </section>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title"><i class="fas fa-user-plus"></i> Create New Employee</h3>
                         </div>
 
-                        <div class="row mb-3">
-                            <label asp-for="Email" class="col-sm-3 col-form-label text-end">📧 Email:</label>
-                            <div class="col-sm-9">
-                                <input asp-for="Email" class="form-control" placeholder="Enter email address" title="Email Address" />
-                                <span asp-validation-for="Email" class="text-danger"></span>
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label asp-for="Department" class="col-sm-3 col-form-label text-end">🏢 Department:</label>
-                            <div class="col-sm-9">
-                                <div class="input-group">
-                                    <select asp-for="Department" class="form-control" asp-items="@ViewBag.DepartmentOptions" title="Select Department" id="DepartmentDropdown">
-                                        <option value="">Select Department</option>
-                                    </select>
-                                    <span class="input-group-text"><i class="bi bi-caret-down-fill"></i></span>
-                                </div>
-                                <span asp-validation-for="Department" class="text-danger"></span>
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label asp-for="Position" class="col-sm-3 col-form-label text-end">💼 Position:</label>
-                            <div class="col-sm-9">
-                                <div class="input-group">
-                                    <select asp-for="Position" class="form-control" id="PositionDropdown" title="Select Position">
-                                        <option value="">Select Position</option>
-                                    </select>
-                                    <span class="input-group-text"><i class="bi bi-caret-down-fill"></i></span>
-                                </div>
-                                <span asp-validation-for="Position" class="text-danger"></span>
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label asp-for="HireDate" class="col-sm-3 col-form-label text-end">🗓️ Hire Date:</label>
-                            <div class="col-sm-9">
-                                <input asp-for="HireDate" class="form-control" type="date" title="Select Hire Date" />
-                                <span asp-validation-for="HireDate" class="text-danger"></span>
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label asp-for="DateOfBirth" class="col-sm-3 col-form-label text-end">🎂 Date of Birth:</label>
-                            <div class="col-sm-9">
-                                <input asp-for="DateOfBirth" class="form-control" type="date" title="Select Date of Birth" />
-                                <span asp-validation-for="DateOfBirth" class="text-danger"></span>
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label asp-for="Type" class="col-sm-3 col-form-label text-end">👔 Employee Type:</label>
-                            <div class="col-sm-9">
-                                <div class="input-group">
-                                    <select asp-for="Type" class="form-control" asp-items="@ViewBag.EmployeeTypeOptions" title="Select Employee Type">
-                                        <option value="">Select Employee Type</option>
-                                    </select>
-                                    <span class="input-group-text"><i class="bi bi-caret-down-fill"></i></span>
-                                </div>
-                                <span asp-validation-for="Type" class="text-danger"></span>
-                            </div>
-                        </div>
-
-                        <div class="mb-3 row">
-                            <label asp-for="Gender" class="col-sm-3 col-form-label text-end">⚧ Gender:</label>
-                            <div class="col-sm-9">
-
-                                <div class="form-check form-check-inline">
-                                    <input asp-for="Gender" type="radio" class="form-check-input" value="Male" />
-                                    <label class="form-check-label" asp-for="Gender">Male</label>
+                        <div class="card-body">
+                            <form asp-controller="Employee" asp-action="Create" method="post" id="employeeForm">
+                                <!-- Full Name -->
+                                <div class="form-group row">
+                                    <label asp-for="FullName" class="col-sm-3 col-form-label">Full Name:</label>
+                                    <div class="col-sm-9">
+                                        <input asp-for="FullName" class="form-control" type="text" placeholder="Enter full name"
+                                               pattern="[A-Za-z\s]+" title="Only alphabets and spaces are allowed" required
+                                               oninput="validateFullName(this)" />
+                                        <span asp-validation-for="FullName" class="text-danger"></span>
+                                        <span id="fullNameError" class="text-danger" style="display:none;">Only alphabets and spaces are allowed.</span>
+                                    </div>
                                 </div>
 
-                                <div class="form-check form-check-inline">
-                                    <input asp-for="Gender" type="radio" class="form-check-input" value="Female" />
-                                    <label class="form-check-label" asp-for="Gender">Female</label>
+
+                                <!-- Email -->
+                                <div class="form-group row">
+                                    <label asp-for="Email" class="col-sm-3 col-form-label">Email:</label>
+                                    <div class="col-sm-9">
+                                        <input asp-for="Email" class="form-control" placeholder="Enter email address"
+                                               type="email" required />
+                                        <span asp-validation-for="Email" class="text-danger"></span>
+                                    </div>
                                 </div>
 
-                                <div class="form-check form-check-inline">
-                                    <input asp-for="Gender" type="radio" class="form-check-input" value="Other" />
-                                    <label class="form-check-label" asp-for="Gender">Other</label>
+                                
+                                            <!-- Department -->
+                                <div class="form-group row">
+                                    <label asp-for="Department" class="col-sm-3 col-form-label">Department:</label>
+                                    <div class="col-sm-9">
+                                        <select asp-for="Department" class="form-control select2" asp-items="@ViewBag.DepartmentOptions" id="DepartmentDropdown" required>
+                                            <option selected="selected" value="">Select Department</option>
+                                        </select>
+                                        <span asp-validation-for="Department" class="text-danger"></span>
+                                    </div>
                                 </div>
-                                <span asp-validation-for="Gender" class="text-danger"></span>
-                            </div>
-                        </div>
+                                       
 
-                        <div class="row mb-3">
-                            <label asp-for="Salary" class="col-sm-3 col-form-label text-end">💰 Salary:</label>
-                            <div class="col-sm-9">
-                                <input asp-for="Salary" class="form-control" placeholder="Enter salary amount" title="Salary" />
-                                <span asp-validation-for="Salary" class="text-danger"></span>
-                            </div>
-                        </div>
+                                <!-- Position -->
+                                <div class="form-group row">
+                                    <label asp-for="Position" class="col-sm-3 col-form-label">Position:</label>
+                                    <div class="col-sm-9">
+                                        <select asp-for="Position" class="form-control select2" id="PositionDropdown" required>
+                                            <option selected="selected" value="">Select Position</option>
+                                        </select>
+                                        <span asp-validation-for="Position" class="text-danger"></span>
+                                    </div>
+                                </div>
 
-                        <div class="text-center mt-4">
-                            <button type="submit" class="btn btn-success btn-lg me-3"><i class="bi bi-check-circle-fill"></i> Create</button>
-                            <a class="btn btn-primary btn-lg" asp-controller="Employee" asp-action="List"><i class="bi bi-arrow-left-circle-fill"></i> Back</a>
+                                <!-- Hire Date -->
+
+                                @* <div class="form-group row"> *@
+                                @*     <label asp-for="HireDate" class="col-sm-3 col-form-label">Hire Date:</label> *@
+                                @*     <div class="col-sm-9"> *@
+                                @*         <input asp-for="HireDate" class="form-control" type="date" required /> *@
+                                @*         <span asp-validation-for="HireDate" class="text-danger"></span> *@
+                                @*     </div> *@
+                                @* </div> *@
+
+                                <div class="form-group row">
+                                    <label asp-for="HireDate" class="col-sm-3 col-form-label">Hire Date:</label>
+                                    <div class="col-sm-9">
+                                        <div class="input-group date" id="reservationdate" data-target-input="nearest">
+                                            <input asp-for="HireDate" type="text" class="form-control datetimepicker-input" data-target="#reservationdate" required />
+                                            <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                            </div>
+                                        </div>
+                                        <span asp-validation-for="HireDate" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                <!-- Date of Birth -->
+                                <div class="form-group row">
+                                    <label asp-for="DateOfBirth" class="col-sm-3 col-form-label">Date of Birth:</label>
+                                    <div class="col-sm-9">
+                                        <div class="input-group date" id="reservationdate2" data-target-input="nearest">
+                                            <input asp-for="DateOfBirth" type="text" class="form-control datetimepicker-input" data-target="#reservationdate2" required />
+                                            <div class="input-group-append" data-target="#reservationdate2" data-toggle="datetimepicker">
+                                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                            </div>
+                                        </div>
+                                        <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                <!-- Employee Type -->
+                                <div class="form-group row">
+                                    <label asp-for="Type" class="col-sm-3 col-form-label">Employee Type:</label>
+                                    <div class="col-sm-9">
+                                        <select asp-for="Type" class="form-control select2" asp-items="@ViewBag.EmployeeTypeOptions" required>
+                                            <option selected ="selected"  value="">Select Employee Type</option>
+                                        </select>
+                                        <span asp-validation-for="Type" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                <!-- Gender -->
+                                <div class="form-group row">
+                                    <label asp-for="Gender" class="col-sm-3 col-form-label">Gender:</label>
+                                    <div class="col-sm-9">
+                                        <div class="icheck-primary d-inline">
+                                            <input asp-for="Gender" type="radio" id="radioMale" class="form-check-input" value="Male" required />
+                                            <label for="radioMale" class="form-check-label">Male</label>
+                                        </div>
+                                        <div class="icheck-primary d-inline">
+                                            <input asp-for="Gender" type="radio" id="radioFemale" class="form-check-input" value="Female" required />
+                                            <label for="radioFemale" class="form-check-label">Female</label>
+                                        </div>
+                                        <div class="icheck-primary d-inline">
+                                            <input asp-for="Gender" type="radio" id="radioOther" class="form-check-input" value="Other" required />
+                                            <label for="radioOther" class="form-check-label">Other</label>
+                                        </div>
+                                        <span asp-validation-for="Gender" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                <!-- Salary -->
+                                <div class="form-group row">
+                                    <label asp-for="Salary" class="col-sm-3 col-form-label">Salary:</label>
+                                    <div class="col-sm-9">
+                                        <input asp-for="Salary" class="form-control" placeholder="Enter salary amount"
+                                               type="number" min="0" required />
+                                        <span asp-validation-for="Salary" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                <!-- Buttons -->
+                                <div class="form-group row">
+                                    <div class="col-sm-12 text-center">
+                                        <button type="submit" id="toastsDefaultSuccess" class="btn btn-success"><i class="fas fa-check-circle"></i> Create</button>
+                                        <a class="btn btn-primary" asp-controller="Employee" asp-action="List"><i class="fas fa-arrow-left"></i> Back</a>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 </div>
 
-@section Scripts {
-    <script>
-        $(document).ready(function () {
-            // Function to load positions and set the selected position
-            function loadPositions(department, selectedPosition) {
-                if (department) {
-                    $.getJSON('@Url.Action("GetPositions")', { department: department }, function (data) {
-                        var $positionDropdown = $('#PositionDropdown');
-                        $positionDropdown.empty();
-                        $positionDropdown.append('<option value="">Select Position</option>');
-                        $.each(data, function (index, value) {
-                            var selected = (value === selectedPosition) ? 'selected' : '';
-                            $positionDropdown.append('<option value="' + value + '" ' + selected + '>' + value + '</option>');
-                        });
-                    });
-                } else {
-                    $('#PositionDropdown').empty().append('<option value="">Select Position</option>');
+
+
+<!-- Scripts for Validation -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#DepartmentDropdown').select2({
+            placeholder: "Select Department", // Placeholder text
+            allowClear: true // Allows clearing the selection
+        });
+    });
+</script>
+
+
+
+<script>
+    $(document).ready(function () {
+        // jQuery Validation Rules
+        $('#employeeForm').validate({
+            rules: {
+                FullName: {
+                    required: true,
+                     Text: "Please enter a valid Name.",
+                    pattern: /^[A-Za-z\s]+$/ 
+                },
+                Email: {
+                    required: true,
+                    email: true
+                },
+                Department: {
+                    required: true
+                },
+                Position: {
+                    required: true
+                },
+                HireDate: {
+                    required: true,
+                    date: true
+                },
+                DateOfBirth: {
+                    required: true,
+                    date: true,
+                    pastDate: true // Custom method
+                },
+                Type: {
+                    required: true
+                },
+                Gender: {
+                    required: true
+                },
+                Salary: {
+                    required: true,
+                    number: true,
+                    min: 0
+                }
+            },
+            messages: {
+                FullName: {
+                    required: "Please enter the full name.",
+                    pattern: "Only alphabets and spaces are allowed."
+                },
+                Email: {
+                    required: "Please enter an email address.",
+                    email: "Please enter a valid email address."
+                },
+                Department: {
+                    required: "Please select a department."
+                },
+                Position: {
+                    required: "Please select a position."
+                },
+                HireDate: {
+                    required: "Please enter the hire date.",
+                    date: "Please enter a valid date."
+                },
+                DateOfBirth: {
+                    required: "Please enter the date of birth.",
+                    date: "Please enter a valid date.",
+                    pastDate: "Date of birth must be in the past."
+                },
+                Type: {
+                    required: "Please select an employee type."
+                },
+                Gender: {
+                    required: "Please select a gender."
+                },
+                Salary: {
+                    required: "Please enter the salary.",
+                    number: "Please enter a valid number.",
+                    min: "Salary must be non-negative."
                 }
             }
-
-            // Check the DepartmentDropdown value on page load and populate PositionDropdown
-            var department = $('#DepartmentDropdown').val();
-            var selectedPosition = '@(Model?.Position ?? "")'; // Safely check if Model or Model.Position is null
-
-            if (department) {
-                loadPositions(department, selectedPosition);
-            }
-
-            // When the Department dropdown value changes, load the corresponding positions
-            $('#DepartmentDropdown').change(function () {
-                var department = $(this).val();
-                loadPositions(department, ''); // Clear selected position when department changes
-            });
         });
-    </script>
-}
+        </script>
+    <Script>
+    function validateFullName(input) {
+        const errorSpan = document.getElementById('fullNameError');
+        const isValid = /^[A-Za-z\s]+$/.test(input.value);
+
+        if (!isValid) {
+            errorSpan.style.display = 'inline';
+        } else {
+            errorSpan.style.display = 'none';
+        }
+        input.value = input.value.replace(/[^A-Za-z\s]/g, '');
+    }
+
+</script>
+<script>
+    $(function () {
+      //Initialize Select2 Elements
+      $('.select2').select2()
+
+      //Initialize Select2 Elements
+      $('.select2bs4').select2({
+        theme: 'bootstrap4'
+      })
+
+      //Datemask dd/mm/yyyy
+      $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
+      //Datemask2 mm/dd/yyyy
+      $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
+      //Money Euro
+      $('[data-mask]').inputmask()
+
+      //Date picker
+      $('#reservationdate').datetimepicker({
+          format: 'L'
+      });
+      reservationdate2
+       $('#reservationdate2').datetimepicker({
+          format: 'L'
+      });
+
+      //Date and time picker
+      $('#reservationdatetime').datetimepicker({ icons: { time: 'far fa-clock' } });
+
+      //Date range picker
+      $('#reservation').daterangepicker()
+      //Date range picker with time picker
+      $('#reservationtime').daterangepicker({
+        timePicker: true,
+        timePickerIncrement: 30,
+        locale: {
+          format: 'MM/DD/YYYY hh:mm A'
+        }
+      })
+      //Date range as a button
+      $('#daterange-btn').daterangepicker(
+        {
+          ranges   : {
+            'Today'       : [moment(), moment()],
+            'Yesterday'   : [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+            'Last 7 Days' : [moment().subtract(6, 'days'), moment()],
+            'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+            'This Month'  : [moment().startOf('month'), moment().endOf('month')],
+            'Last Month'  : [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+          },
+          startDate: moment().subtract(29, 'days'),
+          endDate  : moment()
+        },
+        function (start, end) {
+          $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
+        }
+      )
+
+      //Timepicker
+      $('#timepicker').datetimepicker({
+        format: 'LT'
+      })
+
+      //Bootstrap Duallistbox
+      $('.duallistbox').bootstrapDualListbox()
+
+      //Colorpicker
+      $('.my-colorpicker1').colorpicker()
+      //color picker with addon
+      $('.my-colorpicker2').colorpicker()
+
+      $('.my-colorpicker2').on('colorpickerChange', function(event) {
+        $('.my-colorpicker2 .fa-square').css('color', event.color.toString());
+      })
+
+      $("input[data-bootstrap-switch]").each(function(){
+        $(this).bootstrapSwitch('state', $(this).prop('checked'));
+      })
+
+    })
+    // BS-Stepper Init
+    document.addEventListener('DOMContentLoaded', function () {
+      window.stepper = new Stepper(document.querySelector('.bs-stepper'))
+    })
+
+    // DropzoneJS Demo Code Start
+    Dropzone.autoDiscover = false
+
+    // Get the template HTML and remove it from the doumenthe template HTML and remove it from the doument
+    var previewNode = document.querySelector("#template")
+    previewNode.id = ""
+    var previewTemplate = previewNode.parentNode.innerHTML
+    previewNode.parentNode.removeChild(previewNode)
+
+    var myDropzone = new Dropzone(document.body, { // Make the whole body a dropzone
+      url: "/target-url", // Set the url
+      thumbnailWidth: 80,
+      thumbnailHeight: 80,
+      parallelUploads: 20,
+      previewTemplate: previewTemplate,
+      autoQueue: false, // Make sure the files aren't queued until manually added
+      previewsContainer: "#previews", // Define the container to display the previews
+      clickable: ".fileinput-button" // Define the element that should be used as click trigger to select files.
+    })
+
+    myDropzone.on("addedfile", function(file) {
+      // Hookup the start button
+      file.previewElement.querySelector(".start").onclick = function() { myDropzone.enqueueFile(file) }
+    })
+
+    // Update the total progress bar
+    myDropzone.on("totaluploadprogress", function(progress) {
+      document.querySelector("#total-progress .progress-bar").style.width = progress + "%"
+    })
+
+    myDropzone.on("sending", function(file) {
+      // Show the total progress bar when upload starts
+      document.querySelector("#total-progress").style.opacity = "1"
+      // And disable the start button
+      file.previewElement.querySelector(".start").setAttribute("disabled", "disabled")
+    })
+
+    // Hide the total progress bar when nothing's uploading anymore
+    myDropzone.on("queuecomplete", function(progress) {
+      document.querySelector("#total-progress").style.opacity = "0"
+    })
+
+    // Setup the buttons for all transfers
+    // The "add files" button doesn't need to be setup because the config
+    // `clickable` has already been specified.
+    document.querySelector("#actions .start").onclick = function() {
+      myDropzone.enqueueFiles(myDropzone.getFilesWithStatus(Dropzone.ADDED))
+    }
+    document.querySelector("#actions .cancel").onclick = function() {
+      myDropzone.removeAllFiles(true)
+    }
+    // DropzoneJS Demo Code End
+</script>
+<script>
+    $(document).ready(function () {
+        
+        function loadPositions(department, selectedPosition) {
+            if (department) {
+                $.getJSON('@Url.Action("GetPositions")', { department: department }, function (data) {
+                    var $positionDropdown = $('#PositionDropdown');
+                    $positionDropdown.empty();
+                    $positionDropdown.append('<option value="">Select Position</option>');
+                    $.each(data, function (index, value) {
+                        var selected = (value === selectedPosition) ? 'selected' : '';
+                        $positionDropdown.append('<option value="' + value + '" ' + selected + '>' + value + '</option>');
+                    });
+                });
+            } else {
+                $('#PositionDropdown').empty().append('<option value="">Select Position</option>');
+            }
+        }
+
+     
+        var department = $('#DepartmentDropdown').val();
+        var selectedPosition = '@(Model?.Position ?? "")'; 
+
+        if (department) {
+            loadPositions(department, selectedPosition);
+        }
+
+        
+        $('#DepartmentDropdown').change(function () {
+            var department = $(this).val();
+            loadPositions(department, ''); 
+        });
+    });
+</script>

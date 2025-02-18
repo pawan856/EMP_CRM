@@ -4,10 +4,11 @@ using System.Threading.Tasks;
 using EMP_CRM.Models;
 using EMP_CRM.ViewModels;
 using EMP_CRM.Services;
-using EMP_CRM.Services;
 using System.Text;
 using System.Text.Encodings.Web;
 using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
 
 namespace EMP_CRM.Controllers
 {
@@ -76,7 +77,7 @@ namespace EMP_CRM.Controllers
             var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
 
             if (result.Succeeded)
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("List", "Employee");
 
             ModelState.AddModelError(string.Empty, "Invalid login attempt.");
             return View(model);
@@ -87,8 +88,11 @@ namespace EMP_CRM.Controllers
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
+          //  HttpContext.Session.Clear(); 
             return RedirectToAction("Login", "Account");
         }
+
+
 
         [HttpGet]
         public IActionResult ForgotPassword()

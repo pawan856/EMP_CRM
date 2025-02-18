@@ -28,9 +28,10 @@
                 <p class="login-box-msg">Register a new membership</p>
 
                 <form id="registerForm" asp-action="Register" method="post">
-
+                  
                     <div class="input-group mb-3">
-                        <input asp-for="FullName" class="form-control" placeholder="Full Name">
+                        <input asp-for="FullName" class="form-control" pattern="[A-Za-z\s]+" title="Only alphabets and spaces are allowed" required
+                               oninput="validateFullName(this)"  placeholder="Full Name">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-user"></span>
@@ -38,6 +39,7 @@
                         </div>
                     </div>
                     <span asp-validation-for="FullName" class="text-danger"></span>
+                    <span id="fullNameError" class="text-danger" style="display:none;">Only alphabets and spaces are allowed.</span>
 
                     <div class="input-group mb-3">
                         <input asp-for="Email" class="form-control" placeholder="Email">
@@ -141,6 +143,17 @@
                 }
             });
         });
+            function validateFullName(input) {
+            const errorSpan = document.getElementById('fullNameError');
+            const isValid = /^[A-Za-z\s]+$/.test(input.value);
+
+            if (!isValid) {
+                errorSpan.style.display = 'inline';
+            } else {
+                errorSpan.style.display = 'none';
+            }
+            input.value = input.value.replace(/[^A-Za-z\s]/g, '');
+        }
     </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>

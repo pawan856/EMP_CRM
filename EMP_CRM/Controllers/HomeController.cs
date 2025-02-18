@@ -18,7 +18,7 @@ namespace EMP_CRM.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return RedirectToAction("List", "Employee");
         }
 
         public IActionResult Privacy()
