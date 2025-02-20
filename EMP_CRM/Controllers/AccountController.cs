@@ -32,7 +32,7 @@ namespace EMP_CRM.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken] //CSRF(Cross-Site Request Forgery)  for security purpose
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
             if (!ModelState.IsValid)
@@ -68,7 +68,7 @@ namespace EMP_CRM.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken]//CSRF(Cross-Site Request Forgery)  for security purpose
         public async Task<IActionResult> Login(LoginViewModel model)
         {
             if (!ModelState.IsValid)
@@ -84,7 +84,7 @@ namespace EMP_CRM.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken] //CSRF(Cross-Site Request Forgery)  for security purpose
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
@@ -101,7 +101,7 @@ namespace EMP_CRM.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken]//CSRF(Cross-Site Request Forgery)  for security purpose
         public async Task<IActionResult> ForgotPassword(ForgotPasswordViewModel model)
         {
             if (!ModelState.IsValid)
@@ -137,7 +137,7 @@ namespace EMP_CRM.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken] //CSRF(Cross-Site Request Forgery)  for security purpose 
         public async Task<IActionResult> ResetPassword(ResetPasswordViewModel model)
         {
             if (!ModelState.IsValid)

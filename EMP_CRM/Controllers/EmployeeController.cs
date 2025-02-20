@@ -139,9 +139,10 @@ namespace EmployeePortal.Controllers
 
             return RedirectToAction("List");
         }
-      
 
-        [HttpGet]
+
+        
+            [HttpGet]
         public JsonResult GetPositions(Department department)
         {
             var positions = new Dictionary<Department, List<string>>
@@ -161,7 +162,8 @@ namespace EmployeePortal.Controllers
         {
             ViewBag.DepartmentOptions = new SelectList(Enum.GetValues(typeof(Department)).Cast<Department>());
             ViewBag.EmployeeTypeOptions = new SelectList(Enum.GetValues(typeof(EmployeeType)).Cast<EmployeeType>());
-           
+
         }
+        
     }
 }
