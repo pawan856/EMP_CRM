@@ -1,44 +1,109 @@
-EMP_CRM
+# EMP_CRM
 
-📌 Project Overview
+## 📌 Project Overview
+**EMP_CRM** (Employee CRM) is a .NET Core MVC-based employee management system designed to streamline employee-related operations. This project integrates authentication, authorization, role-based access control, and a dashboard for managing employee records efficiently.
 
-EMP_CRM (Employee CRM) is a .NET Core MVC-based employee management system designed to streamline employee-related operations. This project integrates authentication, authorization, role-based access control, and a dashboard for managing employee records efficiently.
+## 🏗️ Tech Stack
+- **Frontend**: AdminLTE v3 (for UI design)
+- **Backend**: ASP.NET Core 8 (MVC)
+- **Database**: Entity Framework Core with SQL Server
+- **Authentication**: Identity-based authentication and authorization
+- **Middleware**: Custom middleware for handling requests and responses
+- **Logging & Monitoring**: Serilog, Health Checks, and Application Insights
 
-🏗️ Tech Stack
+## ⚡ Features
+- ✅ User Authentication (Login, Registration, Forgot Password)
+- ✅ Role-Based Access Control (RBAC)
+- ✅ Employee Management (CRUD operations using EF Core)
+- ✅ Dashboard with Employee Details
+- ✅ Custom Middleware Implementation
+- ✅ Logging & Monitoring with Serilog
+- ✅ Health Checks for system monitoring
 
-Frontend: AdminLTE v3 (for UI design)
+## 📸 Screenshots
 
-Backend: ASP.NET Core 8 (MVC)
+### Dashboard View
+![Dashboard](https://raw.githubusercontent.com/pawan856/EMP_CRM/main/EMP_CRM/wwwroot/Images/EMP_CRM1.jpeg)
 
-Database: Entity Framework Core with SQL Server
+### Employee List
+![Employee List](https://raw.githubusercontent.com/pawan856/EMP_CRM/main/EMP_CRM/wwwroot/Images/EMP_CRM2.jpeg)
 
-Authentication: Identity-based authentication and authorization
+### Employee Details
+![Employee Details](https://raw.githubusercontent.com/pawan856/EMP_CRM/main/EMP_CRM/wwwroot/Images/EMP_CRM3.jpeg)
 
-Middleware: Custom middleware for handling requests and responses
+### Employee Creation
+![Employee Creation](https://raw.githubusercontent.com/pawan856/EMP_CRM/main/EMP_CRM/wwwroot/Images/EMP_CRM4.jpeg)
 
-Logging & Monitoring: Serilog, Health Checks, and Application Insights
+### Employee Edit
+![Employee Edit](https://raw.githubusercontent.com/pawan856/EMP_CRM/main/EMP_CRM/wwwroot/Images/EMP_CRM5.jpeg)
 
-⚡ Features
+### Employee Deletion
+![Employee Deletion](https://raw.githubusercontent.com/pawan856/EMP_CRM/main/EMP_CRM/wwwroot/Images/EMP_CRM6.jpeg)
 
-✅ User Authentication (Login, Registration, Forgot Password)
+### Role Management
+![Role Management](https://raw.githubusercontent.com/pawan856/EMP_CRM/main/EMP_CRM/wwwroot/Images/EMP_CRM7.jpeg)
 
-✅ Role-Based Access Control (RBAC)
+### User Permissions
+![User Permissions](https://raw.githubusercontent.com/pawan856/EMP_CRM/main/EMP_CRM/wwwroot/Images/EMP_CRM8.jpeg)
 
-✅ Employee Management (CRUD operations using EF Core)
+### Reports & Analytics
+![Reports & Analytics](https://raw.githubusercontent.com/pawan856/EMP_CRM/main/EMP_CRM/wwwroot/Images/EMP_CRM9.jpeg)
 
-✅ Dashboard with Employee Details
+## 🚀 Setup & Installation
+1. **Clone the Repository**
+   ```sh
+   git clone https://github.com/pawan856/EMP_CRM.git
+   cd EMP_CRM
+   ```
+2. **Set Up Database**
+   - Update `appsettings.json` with your SQL Server connection string.
+   - Apply migrations:
+     ```sh
+     dotnet ef database update
+     ```
+3. **Run the Application**
+   ```sh
+   dotnet run
+   ```
+4. **Access the Web App**
+   - Open `http://localhost:5000` (or the specified port) in your browser.
 
-✅ Custom Middleware Implementation
+## 🔗 API Endpoints
+| Endpoint              | Method | Description                 |
+|----------------------|--------|-----------------------------|
+| `/Account/Login`     | POST   | User login                  |
+| `/Account/Register`  | POST   | User registration           |
+| `/Employee`          | GET    | Fetch all employees         |
+| `/Employee/{id}`     | GET    | Fetch employee by ID        |
+| `/Employee/Create`   | POST   | Create a new employee       |
+| `/Employee/Edit/{id}`| PUT    | Update employee details     |
+| `/Employee/Delete/{id}` | DELETE | Remove an employee     |
 
-✅ Logging & Monitoring with Serilog
+## 📂 Project Structure
+```
+EMP_CRM/
+│-- Controllers/
+│-- Models/
+│-- Views/
+│-- Middleware/
+│-- Services/
+│-- wwwroot/
+│-- appsettings.json
+│-- Program.cs
+│-- Startup.cs
+```
 
-✅ Health Checks for system monitoring
+## 🛠️ Future Enhancements
+- 📌 Employee Performance Tracking
+- 📌 Email Notifications for HR Actions
+- 📌 Advanced Reporting & Analytics
+- 📌 Mobile-Friendly UI Enhancements
 
-📜 License
-
-
+## 📜 License
 This project is open-source and available under the MIT License.
 
- Pawan Kumar Singh 
- 
-Feel free to contribute or raise issues! 🚀Author
+---
+**Author:** Pawan856
+
+Feel free to contribute or raise issues! 🚀
+
