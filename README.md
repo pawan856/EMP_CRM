@@ -33,3 +33,9 @@ Logging & Monitoring: Serilog, Health Checks, and Application Insights
 ✅ Logging & Monitoring with Serilog
 
 ✅ Health Checks for system monitoring
+
+📜 License
+
+This project is open-source and available under the MIT License.
+: Pawan856
+Feel free to contribute or raise issues! 🚀Author
