@@ -22,32 +22,32 @@
 
 ## 📸 Screenshots
 
-### Dashboard View
+### Employee Login
 ![Dashboard](https://github.com/pawan856/EMP_CRM/blob/master/EMP_CRM/wwwroot/Images/Emp_CRM1.jpeg)
 
-### Employee List
-![Employee List](https://raw.githubusercontent.com/pawan856/EMP_CRM/main/EMP_CRM/wwwroot/Images/EMP_CRM2.jpeg)
+### New Employee Register
+![Employee List](https://github.com/pawan856/EMP_CRM/blob/master/EMP_CRM/wwwroot/Images/EMP_CRM2.jpeg)
 
-### Employee Details
-![Employee Details](https://raw.githubusercontent.com/pawan856/EMP_CRM/main/EMP_CRM/wwwroot/Images/EMP_CRM3.jpeg)
+### Forgot password
+![Employee Details](https://github.com/pawan856/EMP_CRM/blob/master/EMP_CRM/wwwroot/Images/Emp_CRM3.jpeg)
+
+### Employee Dashboard
+![Employee Creation](https://github.com/pawan856/EMP_CRM/blob/master/EMP_CRM/wwwroot/Images/Emp_CRM4.jpeg)
 
 ### Employee Creation
-![Employee Creation](https://raw.githubusercontent.com/pawan856/EMP_CRM/main/EMP_CRM/wwwroot/Images/EMP_CRM4.jpeg)
+![Employee Edit](https://github.com/pawan856/EMP_CRM/blob/master/EMP_CRM/wwwroot/Images/Emp_CRM5.jpeg)
 
-### Employee Edit
-![Employee Edit](https://raw.githubusercontent.com/pawan856/EMP_CRM/main/EMP_CRM/wwwroot/Images/EMP_CRM5.jpeg)
+### Employee Details
+![Employee Deletion](https://github.com/pawan856/EMP_CRM/blob/master/EMP_CRM/wwwroot/Images/Emp_CRM6.jpeg)
 
-### Employee Deletion
-![Employee Deletion](https://raw.githubusercontent.com/pawan856/EMP_CRM/main/EMP_CRM/wwwroot/Images/EMP_CRM6.jpeg)
+### Employee updations
+![Role Management](https://github.com/pawan856/EMP_CRM/blob/master/EMP_CRM/wwwroot/Images/Emp_CRM7.jpeg)
 
-### Role Management
-![Role Management](https://raw.githubusercontent.com/pawan856/EMP_CRM/main/EMP_CRM/wwwroot/Images/EMP_CRM7.jpeg)
+### Employee Delete
+![User Permissions](https://github.com/pawan856/EMP_CRM/blob/master/EMP_CRM/wwwroot/Images/Emp_CRM8.jpeg)
 
-### User Permissions
-![User Permissions](https://raw.githubusercontent.com/pawan856/EMP_CRM/main/EMP_CRM/wwwroot/Images/EMP_CRM8.jpeg)
-
-### Reports & Analytics
-![Reports & Analytics](https://raw.githubusercontent.com/pawan856/EMP_CRM/main/EMP_CRM/wwwroot/Images/EMP_CRM9.jpeg)
+###  Employee Report
+![Reports & Analytics](https://github.com/pawan856/EMP_CRM/blob/master/EMP_CRM/wwwroot/Images/Emp_CRM9.jpeg)
 
 ## 🚀 Setup & Installation
 1. **Clone the Repository**
