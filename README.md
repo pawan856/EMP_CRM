@@ -39,5 +39,6 @@ Logging & Monitoring: Serilog, Health Checks, and Application Insights
 
 This project is open-source and available under the MIT License.
 
- Pawan856
+ Pawan Kumar Singh 
+ 
 Feel free to contribute or raise issues! 🚀Author
