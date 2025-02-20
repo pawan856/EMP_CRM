@@ -23,7 +23,7 @@
 ## 📸 Screenshots
 
 ### Dashboard View
-![Dashboard](https://raw.githubusercontent.com/pawan856/EMP_CRM/main/EMP_CRM/wwwroot/Images/EMP_CRM1.jpeg)
+![Dashboard](https://github.com/pawan856/EMP_CRM/blob/master/EMP_CRM/wwwroot/Images/Emp_CRM1.jpeg)
 
 ### Employee List
 ![Employee List](https://raw.githubusercontent.com/pawan856/EMP_CRM/main/EMP_CRM/wwwroot/Images/EMP_CRM2.jpeg)
